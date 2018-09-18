@@ -31,7 +31,7 @@
 	 
 	<!-- controller包(自动注入) base-package="**.web; **.services; org.example.framework.log.*" 
 		在不同的父子容器中加载service时，事务控制情况 -->
-	<context:component-scan base-package="org.example.**.web; china.dream.every.framework.log.**" >
+	<context:component-scan base-package="org.example.**.web; org.example.log.**" >
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	<!-- <context:component-scan base-package="demo.web" use-default-filters="false"> 
