@@ -23,7 +23,7 @@ public class UserAction {
 
 	private IUserService userService;
 
-	@RequestMapping("/getAllUser.do")
+	@RequestMapping
 	public String getAllUser(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
 			Model model) {
 
@@ -32,7 +32,7 @@ public class UserAction {
 	
 	@ResponseBody
 //	@RequestMapping("/getUserInfo.do")	//为什么在  MappingJackson2HttpMessageConverter 中配置不起作用。
-	@RequestMapping(value="/getUserInfo.do",produces = "application/json; charset=utf-8")
+	@RequestMapping(produces = "application/json; charset=utf-8")
 	public JsonResult getUserInfo(HttpSession session) {
 //		UserInfoVO user = (UserInfoVO)session.getAttribute(UserConstants.UserInfoInHttpSession);
 		
@@ -45,7 +45,7 @@ public class UserAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/getUserInfoDemoData.do")
+	@RequestMapping
 	public JsonResult getUserInfoDemoData(HttpSession session) {
 		
 		List<UserInfoVO> obj = makeDemoData();

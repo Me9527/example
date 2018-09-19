@@ -166,7 +166,7 @@ function init_DataTables() {
 function editTable2(){
 
 	   	var editor = new $.fn.dataTable.Editor({
-	   		ajax : "/myexample/getUserInfoDemoData.do",
+	   		ajax : "/myexample/users/UserAction/getUserInfoDemoData.do",
 	   		table : "#example2",
 	   		idSrc : "id",
 	   		fields : [ {
@@ -226,7 +226,7 @@ function editTable2(){
 	        stateSave		: true,
 	        'destroy'		: true,
 	        ajax		: {
-	            url: '/myexample/getUserInfoDemoData.do',
+	            url: '/myexample/users/UserAction/getUserInfoDemoData.do',
 	            type: 'POST'
 	        },
 	        columns		: columns,
@@ -278,7 +278,7 @@ function editTable2(){
 function editTable(){
 
    var editor = new $.fn.dataTable.Editor( {
-        ajax: "/myexample/html/modules/module03/user.json",
+        ajax: "/myexample/modules/module03/json/user.json",
         table: "#myexample",
         fields: [ {
                 label: "First name:",
@@ -315,7 +315,7 @@ function editTable(){
         paging:         true,        
         stateSave:  true,
         ajax: {
-            url: "/myexample/html/modules/module03/user.json",
+            url: "/myexample/modules/module03/json/user.json",
             type: 'POST'
         },
         columns: [
@@ -372,7 +372,7 @@ function logout(){
 }
 
 function checkLogin(){
-	var url = '/myexample/getUserInfo.do';
+	var url = '/myexample/users/UserAction/getUserInfo.do';
 	$.ajax({
   	   type: "GET",
   	   async :false,
@@ -442,7 +442,7 @@ function funcNodeClick(funcNode){
 }
 
 function ajaxGetSidebarMenuData(){
-	var url = '/myexample/html/modules/module03/menus.json';
+	var url = '/myexample/modules/module03/json/menus.json';
 	var sidebarMenuData = null;
 	$.ajax({
   	   type: "GET",
@@ -537,7 +537,7 @@ function ajaxLogout(){
 		  return;
 	  }
 	  var queryParam = {};
-	  var url = '/myexample//modules/user/logout';
+	  var url = '/myexample/modules/user/logout';
 	  $.ajax({
 	 	contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 	  	headers    : {
