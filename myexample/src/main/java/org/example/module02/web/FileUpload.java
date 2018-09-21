@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUpload {
 	private Logger logger = Logger.getLogger(this.getClass());
 	
-//	@Value("#{module02.uploadFilePath}") 
-	private String uploadPath = "D:/dir06/tmp/upload"; 
+	@Value("${module02.uploadFilePath:/tmp}")
+	private String uploadPath; 
 	
 	@RequestMapping(produces = "application/json; charset=utf-8")
 	@ResponseBody
@@ -35,8 +36,6 @@ public class FileUpload {
 			} else {
 				logger.info("文件长度: " + myfile.getSize() + ",文件类型: " + myfile.getContentType() + ",文件名称: " + myfile.getName()
 					+ "文件原名: " + myfile.getOriginalFilename());
-				// 如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\文件夹中
-				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload");
 				// 这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉
 				FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(uploadPath, myfile.getOriginalFilename()));
 			}

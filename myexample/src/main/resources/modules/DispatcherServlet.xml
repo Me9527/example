@@ -23,7 +23,9 @@
         </mvc:interceptor>
     </mvc:interceptors>
     -->
-
+    
+    <context:property-placeholder order="0" location="classpath*:modules/**/properties/*.properties"/>    
+        
 	<!-- controller包(自动注入) base-package="**.web; **.services; org.example.framework.log.*" 
 		在不同的父子容器中加载service时，事务控制情况 -->
 	<context:component-scan base-package="org.example.**.web; org.example.log.**">
