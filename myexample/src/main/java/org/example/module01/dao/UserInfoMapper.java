@@ -14,7 +14,7 @@ public interface UserInfoMapper {
 
     List<UserInfo> selectData(Map<String,Object> params);
     
-    List<UserInfo> selectData(Page page, Map<String,Object> params);
+    List<UserInfo> selectData(Page<UserInfo> page, Map<String,Object> params);
     
 	//List<Map<String, Object>> search(Map<String,Object> params);
     
