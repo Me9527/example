@@ -12,6 +12,16 @@ http://localhost:8000/myexample/modules/module01/ActionOne/testHystrix.do?uid=2&
 http://localhost:2101/consumer2
 
 
+
+
+http://localhost:8000/myexample/modules/module02/jsp/fileupload.jsp
+http://localhost:8000/myexample/users/UserAction/getUserInfoDemoData.do
+http://localhost:8000/myexample/users/UserAction/getUserInfo.do
+
+//以下2个url演示在同一个类中，同时使用MVC URL注解 和 框架自动解释URL功能
+http://localhost:8000/myexample/modules/module02/actionTwo.do?username=zhouyunlong
+http://localhost:8000/myexample/modules/module02/ActionTwo/aabbcc.do
+
 https://www.tutorialspoint.com/bootstrap/bootstrap_ajax_demo.htm
 
 This information is kept in the file DispatcherServlet.properties in the package org.springframework.web.servlet
@@ -155,4 +165,13 @@ eureka.serviceUrl.default=http://localhost:8080/eureka/v2/
 //@EnableHystrixDashboard
 @EnableCircuitBreaker
 
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="locations">
+            <list>
+                <value>classpath*:modules/**/properties/*.properties</value>
+            </list>
+        </property>
+    </bean>
+    
 		

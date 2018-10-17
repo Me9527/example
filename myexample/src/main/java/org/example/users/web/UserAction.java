@@ -18,6 +18,7 @@ import china.dream.every.framework.security.util.UserConstants;
 import china.dream.every.framework.security.vo.MenuNode;
 import china.dream.every.framework.security.vo.UserInfoVO;
 
+//定制框架功能，MVC请求URL模式为模块名/类名/方法名
 @Controller
 public class UserAction {
 
@@ -30,6 +31,8 @@ public class UserAction {
 		return "page02";
 	}
 	
+	//定制框架功能，MVC请求URL模式为模块名/类名/方法名
+	//http://localhost:8000/myexample/users/UserAction/getUserInfo.do
 	//@RequestMapping("/getUserInfo.do")	//为什么在  MappingJackson2HttpMessageConverter 中配置不起作用。
 	//获取登录后的用户信息
 	@ResponseBody
@@ -43,6 +46,8 @@ public class UserAction {
 			return new JsonResult(false, "Not login");
 	}
 	
+	//定制框架功能，MVC请求URL模式为模块名/类名/方法名
+	//http://localhost:8000/myexample/users/UserAction/getUserInfoDemoData.do
 	@ResponseBody
 	@RequestMapping
 	public JsonResult getUserInfoDemoData(HttpSession session) {

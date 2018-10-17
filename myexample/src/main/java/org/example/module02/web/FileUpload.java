@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import china.dream.every.framework.json.JsonResult;
 
+//定制框架功能，MVC请求URL模式为模块名/类名/方法名
 @Controller
 public class FileUpload {
 	private Logger logger = Logger.getLogger(this.getClass());
