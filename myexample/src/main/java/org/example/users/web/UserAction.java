@@ -30,18 +30,17 @@ public class UserAction {
 		return "page02";
 	}
 	
+	//@RequestMapping("/getUserInfo.do")	//为什么在  MappingJackson2HttpMessageConverter 中配置不起作用。
+	//获取登录后的用户信息
 	@ResponseBody
-//	@RequestMapping("/getUserInfo.do")	//为什么在  MappingJackson2HttpMessageConverter 中配置不起作用。
 	@RequestMapping(produces = "application/json; charset=utf-8")
 	public JsonResult getUserInfo(HttpSession session) {
-//		UserInfoVO user = (UserInfoVO)session.getAttribute(UserConstants.UserInfoInHttpSession);
-		
+
 		Object obj = session.getAttribute(UserConstants.UserInfoInHttpSession);
 		if(obj != null && obj instanceof UserInfoVO)
 			return new JsonResult(true, "success", obj);
 		else
 			return new JsonResult(false, "Not login");
-		
 	}
 	
 	@ResponseBody

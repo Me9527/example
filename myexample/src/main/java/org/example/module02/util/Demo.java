@@ -5,9 +5,10 @@ import java.util.regex.Pattern;
 public class Demo {
 
 	public Demo() {
-		// TODO Auto-generated constructor stub
+
 	}
 
+	//演示正则表达式问题
 	public static void main(String[] arg) {
 		String userName = "^([a-zA-Z0-9])(([\\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$" ; //"^(([a-z])+.)+[A-Z]([a-z])+$";
 		String password = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!";

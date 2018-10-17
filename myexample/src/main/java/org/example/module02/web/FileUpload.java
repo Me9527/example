@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import china.dream.every.framework.json.JsonResult;
+
 @Controller
 public class FileUpload {
 	private Logger logger = Logger.getLogger(this.getClass());
@@ -24,7 +26,7 @@ public class FileUpload {
 	
 	@RequestMapping(produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String doUpload(@RequestParam MultipartFile[] myfiles, HttpServletRequest request,
+	public JsonResult doUpload(@RequestParam MultipartFile[] myfiles, HttpServletRequest request,
 			@RequestParam(value = "att2") String att2, @RequestParam(value = "att3") String att3, Model model)
 			throws IOException {
 		// 如果只是上传一个文件，则只需要MultipartFile类型接收文件即可，而且无需显式指定@RequestParam注解
@@ -40,7 +42,9 @@ public class FileUpload {
 				FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(uploadPath, myfile.getOriginalFilename()));
 			}
 		}
-		return "上传完成";
+		
+		return new JsonResult(true, "上传完成");
+//		return "上传完成";
 	}
 
 	public String getUploadPath() {
