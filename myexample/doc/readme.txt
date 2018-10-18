@@ -1,19 +1,9 @@
-http://localhost:8000/myexample/modules/module01/jsp/page01.jsp
-http://localhost:8080/myexample/modules/module01/jsp/registration.jsp
-http://localhost:8080/myexample/modules/module02/jsp/registration.jsp
-http://localhost:8000/myexample/log4j.do
-http://localhost:8080/myexample/modules/module01/html/main.html
-http://localhost:8000/myexample/modules/module03/html/main.html
-http://localhost:8000/myexample/modules/module02/actionTwo.do
 
-http://localhost:8080/myexample/modules/module02/actionTwo.do
-http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do
-http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=2&param=abc
 http://localhost:2101/consumer2
 
-
-
 // ----------------------------------------------------------------------------------
+http://localhost:8000/myexample/log4j.do
+
 http://localhost:8000/myexample/modules/module02/jsp/fileupload.jsp
 http://localhost:8000/myexample/users/UserAction/getUserInfoDemoData.do
 http://localhost:8000/myexample/users/UserAction/getUserInfo.do
@@ -27,23 +17,25 @@ http://localhost:8000/myexample/module02/actionTwo.do
 http://localhost:8000/myexample/module02/ActionThree/getUserInfo.do?username=zhouyunlong
 http://localhost:8000/myexample/module02/invokeService.do
 
-
-
 http://localhost:8000/myexample/module01/ActionOne/index.do
 http://localhost:8000/myexample/module01/ActionOne/greeting.do
 http://localhost:8000/myexample/module01/ActionOne/addUser.do
 http://localhost:8000/myexample/module01/ActionOne/testMybatis.do
 http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do
-http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=2&param=abc
 http://localhost:8000/myexample/module01/ActionOne/testEurekaClient.do
+http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=2&param=abc
+http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=200&param=abc
 
 
 
+//孙悟空可以访问module01和module02；猪八戒只能访问module01
+http://localhost:8000/myexample/modules/module01/jsp/registration.jsp
+http://localhost:8000/myexample/modules/module02/jsp/registration.jsp
+http://localhost:8000/myexample/modules/module03/html/main.html
 
-
-
-
-
+http://localhost:8000/myexample/modules/module01/jsp/page01.jsp
+http://localhost:8000/myexample/modules/module01/html/main.html
+// ----------------------------------------------------------------------------------
 
 https://www.tutorialspoint.com/bootstrap/bootstrap_ajax_demo.htm
 

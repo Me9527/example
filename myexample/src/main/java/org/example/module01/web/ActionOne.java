@@ -5,15 +5,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.example.module01.services.IServiceOne;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import china.dream.every.framework.json.JsonResult;
 import china.dream.every.framework.security.util.UserConstants;
 import china.dream.every.framework.security.vo.UserInfoVO;
 
