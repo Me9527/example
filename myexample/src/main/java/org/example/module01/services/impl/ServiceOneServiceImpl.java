@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.example.module01.dao.UserInfoMapper;
@@ -114,6 +113,8 @@ public class ServiceOneServiceImpl implements IServiceOne {
 		return "fallbck123";
 	}
 	
+	
+	@SuppressWarnings("unused")
 	private void sendRequestToServiceUsingEureka(EurekaClient eurekaClient, String param) {
 		// initialize the client
 		// this is the vip address for the example service to talk to as defined in
