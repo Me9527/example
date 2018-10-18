@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import china.dream.every.framework.security.util.UserConstants;
 import china.dream.every.framework.security.vo.UserInfoVO;
 
-//TODO mike module02.web 下不能存在同名的ActionOne类问题。
+//	module02.web 下不能存在同名的ActionOne类问题。 解决办法 @Controller("ActionOne2")
+//	AnnotationBeanNameGenerator.java public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) 
 
 //定制框架功能，MVC请求URL模式为模块名/类名/方法名   （get set 开头的方法除外）
 @Controller
