@@ -44,7 +44,7 @@ public class ActionOne {
 //		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //		logger.info( userDetails.getName()+ "----------------------------------------" + userDetails.getUsername());
 		
-		return "page01";
+		return "page01";	// /modules/module01/jsp/page01.jsp
 	}
 
 	@RequestMapping

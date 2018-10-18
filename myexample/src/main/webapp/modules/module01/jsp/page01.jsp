@@ -8,16 +8,11 @@
     <!-- ExtJS -->
 
     <!-- Shared -->
-    <link rel="stylesheet" type="text/css" href="../css/example.css" />
-
 
     <!-- Example -->
-    <script type="text/javascript" src="../js/absform.js"></script>
 </head>
 <body>
-    <h1>Absolute Layout with Forms</h1>
-
-    <p>The js is not minified so it is readable. See <a href="../js/absform.js">absform.js</a>.</p>
-
+    <p> http://localhost:8000/myexample/module01/ActionOne/greeting.do </p>
+    <p> 框架自动到web页面资源目录下/modules/对应模块/jsp/  寻找page01.jsp </p>
 </body>
 </html>
