@@ -8,7 +8,7 @@
     <!-- Shared -->
     <link rel="stylesheet" type="text/css" href="${ctx}/modules/module01/css/example.css" />
     <script type="text/javascript">
-    	var url = ctx + "/modules/module01/ActionOne/bbb.do?${_csrf.parameterName}=${_csrf.token}";
+    	var url = ctx + "/module01/ActionOne/greeting.do?${_csrf.parameterName}=${_csrf.token}";
     </script>
     <script type="text/javascript" src="${ctx}/modules/module01/js/registration.js"></script>
     

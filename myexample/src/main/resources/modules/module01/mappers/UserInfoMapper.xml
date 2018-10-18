@@ -10,13 +10,16 @@
 
   <select id="selectData" parameterType="map" resultMap="BaseResultMap">	
  	SELECT UD.ID, UD.UID, UD.NICKNAME, UD.ADDRESS FROM P_USERS_DETAIL UD 
- 	where 1=1 and UID = #{uid,jdbcType=DECIMAL}
+ 	where 1=1 and NICKNAME = #{nickname}
     order by UID
    </select>
    
   <insert id="insert" parameterType="org.example.module01.model.UserInfo">
-    insert into P_USERS_DETAIL (ID, UID, NICKNAME, ADDRESS)
-    values (#{id,jdbcType=DECIMAL}, #{uid,jdbcType=DECIMAL}, #{nickname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+    <selectKey keyProperty="id" resultType="long">
+       select LAST_INSERT_ID()
+    </selectKey>
+    insert into P_USERS_DETAIL (UID, NICKNAME, ADDRESS)
+    values ( #{uid,jdbcType=DECIMAL}, #{nickname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
   </insert>     
   
 </mapper>

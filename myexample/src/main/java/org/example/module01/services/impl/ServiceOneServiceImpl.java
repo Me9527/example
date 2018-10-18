@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.example.module01.dao.UserInfoMapper;
@@ -42,34 +43,37 @@ public class ServiceOneServiceImpl implements IServiceOne {
 	@Autowired
     private ILoadBalancer ribbonLoadBalancer;
     
-	public String getNamePrefix() {
-		return namePrefix;
-	}
-
-	public void setNamePrefix(String namePrefix) {
-		this.namePrefix = namePrefix;
-	}
-
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
-	@Override
-	public String funcOne(String param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	@Autowired
+	private UserInfoMapper UserInfoMapper;
+	
 	@Override
 	public void addUser(String param) {
 		String insert = "insert into test_user (name) values (?)";
 		jdbcTemplate.update(insert, namePrefix + param);
 	}
 
+	public Object testMybatis(String param) {
+		//Mybatis 查询
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("nickname", null == param ? "郭靖" : param);
+		List<UserInfo> tmp = UserInfoMapper.selectData(params);
+		logger.info(tmp);
+		
+		//Mybatis 插入数据
+		UserInfo nn = new UserInfo();
+		nn.setAddress("牛家村"); nn.setNickname("郭靖");	nn.setUid(99999999L);
+		if(null != param) nn.setNickname(param);
+		UserInfoMapper.insert(nn);
+		
+		//Mybatis 分页查询
+        Page<UserInfo> page = new Page<UserInfo>(1,10);
+        @SuppressWarnings("unused")
+		List<UserInfo> lstUser = UserInfoMapper.selectData(page, params);
+		logger.info(page);
+		
+		return page;
+	}
+	
 	public Object testEurekaClient(String param) {
 		String vipAddress = "service-provide-01";
 		InstanceInfo nextServerInfo = null;
@@ -84,34 +88,15 @@ public class ServiceOneServiceImpl implements IServiceOne {
 		} catch (Exception e) {
 			logger.info("Cannot get an instance of example service to talk to from eureka");
 		}
-
 		return "testEurekaClient";
 	}
 
-	@Autowired
-	private UserInfoMapper UserInfoMapper;
 	public Object testRibbonClient(String param) {
-
 		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
 		String url = "http://" + server.getHost() + ":" + server.getPort() + "/user/getUser/2";
 		logger.info(url);
 		Object obj = restTemplate.getForObject(url, String.class);
 		logger.info(obj);
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("uid", 2);
-		List<UserInfo> tmp = UserInfoMapper.selectData(params);
-		logger.info(tmp);
-		
-		UserInfo nn = new UserInfo();
-		nn.setId(999L); nn.setAddress("牛家村"); nn.setNickname("郭靖");	nn.setUid(999L);
-		UserInfoMapper.insert(nn);
-		params.put("uid", 999);
-		
-        Page<UserInfo> page = new Page<UserInfo>(1,10);
-        @SuppressWarnings("unused")
-		List<UserInfo> lstUser = UserInfoMapper.selectData(page, params);
-        
-		logger.info(tmp);
 		return obj;
 	}
 
@@ -138,8 +123,7 @@ public class ServiceOneServiceImpl implements IServiceOne {
 		try {
 			nextServerInfo = eurekaClient.getNextServerFromEureka(vipAddress, false);
 		} catch (Exception e) {
-			logger.info("Cannot get an instance of example service to talk to from eureka");
-			System.exit(-1);
+			logger.error("Cannot get an instance of example service to talk to from eureka");
 		}
 
 		logger.info("Found an instance of example service to talk to from eureka: " + nextServerInfo.getVIPAddress()
@@ -153,11 +137,15 @@ public class ServiceOneServiceImpl implements IServiceOne {
 		try {
 			s.connect(new InetSocketAddress(nextServerInfo.getHostName(), serverPort));
 		} catch (IOException e) {
-			System.err.println(
-					"Could not connect to the server :" + nextServerInfo.getHostName() + " at port " + serverPort);
+			logger.error("Could not connect to the server :" + nextServerInfo.getHostName() + " at port " + serverPort);
 		} catch (Exception e) {
-			System.err.println("Could not connect to the server :" + nextServerInfo.getHostName() + " at port "
-					+ serverPort + "due to Exception " + e);
+			logger.error("Could not connect to the server :" + nextServerInfo.getHostName() + " at port "+ serverPort + "due to Exception " + e);
+		} finally {
+			try {
+				s.close();
+			} catch (IOException e) {
+				logger.error(e);
+			}
 		}
 		try {
 			String request = "FOO " + new Date();
@@ -175,8 +163,24 @@ public class ServiceOneServiceImpl implements IServiceOne {
 			}
 			rd.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
+	}
+
+	public String getNamePrefix() {
+		return namePrefix;
+	}
+
+	public void setNamePrefix(String namePrefix) {
+		this.namePrefix = namePrefix;
+	}
+
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 }

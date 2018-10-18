@@ -39,6 +39,7 @@ public class UserAction {
 	@RequestMapping(produces = "application/json; charset=utf-8")
 	public JsonResult getUserInfo(HttpSession session) {
 
+		//UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Object obj = session.getAttribute(UserConstants.UserInfoInHttpSession);
 		if(obj != null && obj instanceof UserInfoVO)
 			return new JsonResult(true, "success", obj);
@@ -48,8 +49,8 @@ public class UserAction {
 	
 	//定制框架功能，MVC请求URL模式为模块名/类名/方法名
 	//http://localhost:8000/myexample/users/UserAction/getUserInfoDemoData.do
-	@ResponseBody
 	@RequestMapping
+	@ResponseBody
 	public JsonResult getUserInfoDemoData(HttpSession session) {
 		
 		List<UserInfoVO> obj = makeDemoData();

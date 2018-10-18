@@ -53,10 +53,6 @@ public class ActionThree {
 		return "page02";
 	}
 	
-	public void anConttrolMethod() {
-		logger.info("anConttrolMethod");
-	}
-	
 	public Integer getAbc() {
 		return abc;
 	}

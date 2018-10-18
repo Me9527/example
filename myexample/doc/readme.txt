@@ -7,8 +7,8 @@ http://localhost:8000/myexample/modules/module03/html/main.html
 http://localhost:8000/myexample/modules/module02/actionTwo.do
 
 http://localhost:8080/myexample/modules/module02/actionTwo.do
-http://localhost:8000/myexample/modules/module01/ActionOne/testRibbonClient.do
-http://localhost:8000/myexample/modules/module01/ActionOne/testHystrix.do?uid=2&param=abc
+http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do
+http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=2&param=abc
 http://localhost:2101/consumer2
 
 
@@ -26,6 +26,21 @@ http://localhost:8000/myexample/modules/module02/ActionTwo/getUserInfo.do
 http://localhost:8000/myexample/module02/actionTwo.do
 http://localhost:8000/myexample/module02/ActionThree/getUserInfo.do?username=zhouyunlong
 http://localhost:8000/myexample/module02/invokeService.do
+
+
+
+http://localhost:8000/myexample/module01/ActionOne/index.do
+http://localhost:8000/myexample/module01/ActionOne/greeting.do
+http://localhost:8000/myexample/module01/ActionOne/addUser.do
+http://localhost:8000/myexample/module01/ActionOne/testMybatis.do
+http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do
+http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=2&param=abc
+http://localhost:8000/myexample/module01/ActionOne/testEurekaClient.do
+
+
+
+
+
 
 
 
