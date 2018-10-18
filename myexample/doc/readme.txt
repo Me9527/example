@@ -13,14 +13,22 @@ http://localhost:2101/consumer2
 
 
 
-
+// ----------------------------------------------------------------------------------
 http://localhost:8000/myexample/modules/module02/jsp/fileupload.jsp
 http://localhost:8000/myexample/users/UserAction/getUserInfoDemoData.do
 http://localhost:8000/myexample/users/UserAction/getUserInfo.do
 
-//以下2个url演示在同一个类中，同时使用MVC URL注解 和 框架自动解释URL功能
+//以下2个url演示在同一个类中，同时使用MVC URL注解 和 定制框架默认按模块吗+类名+方法名生成MVC URL功能
 http://localhost:8000/myexample/modules/module02/actionTwo.do?username=zhouyunlong
-http://localhost:8000/myexample/modules/module02/ActionTwo/aabbcc.do
+http://localhost:8000/myexample/modules/module02/ActionTwo/getUserInfo.do
+
+//以下3个url演示在同一个类中，同时使用MVC URL注解 和 定制框架默认按模块吗+类名+方法名生成MVC URL功能
+http://localhost:8000/myexample/module02/actionTwo.do
+http://localhost:8000/myexample/module02/ActionThree/getUserInfo.do?username=zhouyunlong
+http://localhost:8000/myexample/module02/invokeService.do
+
+
+
 
 https://www.tutorialspoint.com/bootstrap/bootstrap_ajax_demo.htm
 

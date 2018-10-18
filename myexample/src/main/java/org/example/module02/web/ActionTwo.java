@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import china.dream.every.framework.security.vo.UserInfoVO;
 
 @Controller
-@RequestMapping("/modules/module02/")
+@RequestMapping("/modules/module02/")	//不应该有这个URL配置，框架会默认取模块名组成URL路径
 public class ActionTwo {
 
 	private Integer abc;
@@ -52,14 +52,14 @@ public class ActionTwo {
 	}
 
 	//定制框架功能，MVC请求URL模式为模块名/类名/方法名
-	//http://localhost:8000/myexample/modules/module02/ActionTwo/aabbcc.do
+	//http://localhost:8000/myexample/modules/module02/ActionTwo/getUserInfo.do
 	@RequestMapping
 	@ResponseBody
-	public UserInfoVO aabbcc(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
+	public UserInfoVO getUserInfo(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
 			Model model) {
 		
 		//bizTwo.addBiz01(username);
-		logger.info("aabbcc:" + model);
+		logger.info("getUserInfo:" + model);
 		UserInfoVO user = new UserInfoVO(123L, "山胖子", "象牙山");
 		return user;
 	}

@@ -152,8 +152,8 @@ function testAccessRefuse(){
   	}
   	var queryParam = {};
   	// alert($("#username").val());
-    // "/modules/module02/ActionTwo/aabbcc.do?${_csrf.parameterName}=${_csrf.token}";
-  	var url = '/myexample/modules/module02/ActionTwo/aabbcc.do';
+    // "/modules/module02/ActionTwo/getUserInfo.do?${_csrf.parameterName}=${_csrf.token}";
+  	var url = '/myexample/modules/module02/ActionTwo/getUserInfo.do';
   	$.ajax({
  		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
   		headers    : {

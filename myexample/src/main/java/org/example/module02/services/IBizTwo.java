@@ -10,4 +10,5 @@ public interface IBizTwo {
 	public List<Map<String, Object>> getBiz01(String param);
 	public void addBiz01(String param);
 	
+	public List<Map<String, Object>> invokeService(String param);
 }

@@ -3,6 +3,7 @@ package org.example.module02.web;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.example.module02.services.IBizTwo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +13,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import china.dream.every.framework.security.vo.UserInfoVO;
 
-//@RequestMapping("/modules/module02/")
 @Controller
 public class ActionThree {
 
 	private Integer abc;
 	private IBizTwo bizTwo;
+	private Logger logger = Logger.getLogger(this.getClass());
 	
-	@RequestMapping("/actionTwo.do")
+	@RequestMapping("/actionTwo.do")	//不应该有这个URL配置，框架会默认取方法名组成URL路径
 	public String actionTwo(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
 			Model model) {
 		
 		model.addAttribute("username", username);
-		System.out.println("page02");
+		logger.info("page02:" + model);
 		bizTwo.addBiz01(username);
 		@SuppressWarnings("unused")
 		List<Map<String, Object>>  rs = bizTwo.getBiz01(username);
@@ -33,17 +34,27 @@ public class ActionThree {
 
 	@RequestMapping
 	@ResponseBody
-	public UserInfoVO aabbcc(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
+	public UserInfoVO getUserInfo(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
 			Model model) {
 		
-		bizTwo.addBiz01(username);
+		//bizTwo.addBiz01(username);
+		logger.info("getUserInfo:" + model);
 		UserInfoVO user = new UserInfoVO(123L, "山胖子", "象牙山");
-		System.out.println("aabbcc");
 		return user;
 	}
 
+	@RequestMapping("/invokeService.do")	//不应该有这个URL配置，框架会默认取方法名组成URL路径
+	public String invokeService(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
+			Model model) {
+		
+		logger.info("invokeService:" + username);
+		@SuppressWarnings("unused")
+		List<Map<String, Object>>  rs = bizTwo.invokeService(username);
+		return "page02";
+	}
+	
 	public void anConttrolMethod() {
-		System.out.println("anConttrolMethod");
+		logger.info("anConttrolMethod");
 	}
 	
 	public Integer getAbc() {

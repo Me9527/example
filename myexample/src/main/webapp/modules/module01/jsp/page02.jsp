@@ -8,7 +8,7 @@
     <!-- Shared -->
     <link rel="stylesheet" type="text/css" href="../css/example.css" />
     <script type="text/javascript">
-    	var url = ctx + "/modules/module02/ActionTwo/aabbcc.do?${_csrf.parameterName}=${_csrf.token}";
+    	var url = ctx + "/modules/module02/ActionTwo/getUserInfo.do?${_csrf.parameterName}=${_csrf.token}";
     </script>
     <script type="text/javascript" src="../js/registration2.js"></script>
     
