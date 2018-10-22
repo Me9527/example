@@ -91,12 +91,13 @@ create table P_USERS_DETAIL
 
 
 
+--  myexample 用演示表
+create table P_PRODUCT
+(
+  ID           INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  NAME         VARCHAR(128) not null,
+  DESCRIPT     VARCHAR(128) not null,
+  PRICE        DECIMAL(10,2),
+  PRIMARY KEY (ID)
+);
 
----------------------以下可删除--------------------------
-
-
-CREATE TABLE `test_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
