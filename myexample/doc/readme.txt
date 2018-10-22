@@ -37,6 +37,22 @@ http://localhost:8000/myexample/modules/module01/jsp/page01.jsp
 http://localhost:8000/myexample/modules/module01/html/main.html
 // ----------------------------------------------------------------------------------
 
+
+
+// springcloud-service-provide 演示url
+localhost:2001/product/getProdut/2
+localhost:2001/product/getAllProduct
+localhost:2001/product/deleteProductById/2
+localhost:2001/product/addProduct?name=abc&descrpit=one_product&price=8.8
+localhost:2001/product/addProduct2?name=bbb&descript=3_product&price=2.8
+
+
+
+
+
+
+
+
 https://www.tutorialspoint.com/bootstrap/bootstrap_ajax_demo.htm
 
 This information is kept in the file DispatcherServlet.properties in the package org.springframework.web.servlet
