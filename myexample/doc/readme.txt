@@ -52,6 +52,43 @@ localhost:2001/product/addProduct2?name=bbb&descript=3_product&price=2.8
 
 
 
+Eureka 只能在一个region内做负载均衡，不能跨region。
+ It's primary purpose of holding information is for load balancing within a region.
+ in AWS, load balancing requires much more sophistication in registering and de-registering servers with load balancer on the fly. S
+ There is one eureka cluster per region which knows only about instances in its region. There is at the least one eureka server per zone to handle zone failures.
+ 
+ Services register with Eureka and then send heartbeats to renew their leases every 30 seconds. If the client cannot renew the lease for a few times,
+ it is taken out of the server registry in about 90 seconds. The registration information and the renewals are replicated to all the eureka nodes in the cluster. 
+ The clients from any zone can look up the registry information (happens every 30 seconds) to locate their services (which could be in any zone) and make remote calls.
+ With Eureka you can add or remove cluster nodes on the fly. You can tune the internal configurations from timeouts to thread pools.
+ 
+ Eureka client also searches for eureka-client-{test,prod}.properties.
+ 
+ The Eureka Server will use its Eureka Client configuration to identify peer eureka server that have the same name (ie) eureka.name
+ 
+ Eureka clients tries to talk to Eureka Server in the same zone. 
+ If there are problems talking with the server or if the server does not exist in the same zone, the clients fail over to the servers in the other zones.
+ 
+ appID is the name of the application and instanceID is the unique id associated with the instance. In AWS cloud, 
+ instanceID is the instance id of the instance and in other data centers, it is the hostname of the instance.
+ 
+ It is important to note that Eureka client cleans up the HTTP connections that have been idle for over 30 seconds that it created for the purpose of server communication. 
+ This is because of the AWS firewall restrictions that do not allow traffic on to pass through a connection after a few minutes of idle time.
+   
+ client based load balancer  VS server based load balancer
+
+如何配置多个zone
+
+服务消费者和服务提供者分别属于哪个zone，均是通过eureka.instance.metadata-map.zone来判定的。
+服务消费者会先通过ribbon去注册中心拉取一份服务提供者的列表，然后通过eureka.instance.metadata-map.zone指定的zone进行过滤，过滤之后如果同一个zone内的服务提供者有多个实例，则会轮流调用。
+只有在同一个zone内的所有服务提供者都不可用时，才会调用其它zone内的服务提供者。
+
+
+
+
+
+
+
 
 https://www.tutorialspoint.com/bootstrap/bootstrap_ajax_demo.htm
 
