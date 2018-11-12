@@ -6,6 +6,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.example.module02.services.IBizTwo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -28,8 +30,8 @@ public class BizTwoServiceImpl implements IBizTwo {
     
 //    private LoadBalancerClient loadBalancerClient;
 	
-    @Autowired
-    private ILoadBalancer ribbonLoadBalancer;
+	@Autowired
+	private ServiceInstanceChooser loadBalancerClient;
     
 //	public LoadBalancerClient getLoadBalancerClient() {
 //		return loadBalancerClient;
@@ -54,14 +56,6 @@ public class BizTwoServiceImpl implements IBizTwo {
 	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
-
-//	public ILoadBalancer getRibbonLoadBalancer() {
-//		return ribbonLoadBalancer;
-//	}
-//
-//	public void setRibbonLoadBalancer(ILoadBalancer ribbonLoadBalancer) {
-//		this.ribbonLoadBalancer = ribbonLoadBalancer;
-//	}
 
 	@Override
 	public String funcOne(String param) {
@@ -94,11 +88,8 @@ public class BizTwoServiceImpl implements IBizTwo {
 	@Override
 	//@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 	public List<Map<String, Object>> invokeService(String param) {
-		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
-//        ServiceInstance serviceInstance = loadBalancerClient.choose("service-provide-01");
-//        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/getUser/2";
-//        System.out.println(url);
-		String url = "http://" + server.getHost() + ":" + server.getPort() + "/user/getUser/2";
+		ServiceInstance serviceInstance = loadBalancerClient.choose("service-provide-01");
+		String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/getUser/2";
 		logger.info(url);
 		Object obj = restTemplate.getForObject(url, String.class);
 		logger.info(obj);

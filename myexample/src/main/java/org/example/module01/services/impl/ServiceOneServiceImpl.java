@@ -16,6 +16,8 @@ import org.example.module01.dao.UserInfoMapper;
 import org.example.module01.model.UserInfo;
 import org.example.module01.services.IServiceOne;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,11 +41,14 @@ public class ServiceOneServiceImpl implements IServiceOne {
 	@Autowired
 	private DiscoveryClient eurekaClient;
 
-	@Autowired
-    private ILoadBalancer ribbonLoadBalancer;
+//	@Autowired
+//    private ILoadBalancer ribbonLoadBalancer;
     
 	@Autowired
 	private UserInfoMapper UserInfoMapper;
+	
+	@Autowired
+	private ServiceInstanceChooser loadBalancerClient;
 	
 	@Override
 	public void addUser(String param) {
@@ -91,18 +96,32 @@ public class ServiceOneServiceImpl implements IServiceOne {
 	}
 
 	public Object testRibbonClient(String param) {
-		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
-		String url = "http://" + server.getHost() + ":" + server.getPort() + "/user/getUser/2";
+		ServiceInstance serviceInstance = loadBalancerClient.choose("service-provide-01");
+//		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
+		String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/getUser/2";
 		logger.info(url);
 		Object obj = restTemplate.getForObject(url, String.class);
 		logger.info(obj);
+		if(param != null && "accessAnotherService".equals(param))
+			accessAnotherService(param);
 		return obj;
 	}
 
+	
+	private void accessAnotherService(String param) {
+		ServiceInstance serviceInstance = loadBalancerClient.choose("service-provide-02");
+//		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
+		String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/getUser/2";
+		logger.info(url);
+		Object obj = restTemplate.getForObject(url, String.class);
+		logger.info("accessAnotherService:" + obj);
+	}
+	
 	@HystrixCommand(fallbackMethod = "fallback")
 	public Object testHystrix(String param, Integer uid){
-		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
-		String url = "http://" + server.getHost() + ":" + server.getPort() + "/user/getUser/" + uid;
+		ServiceInstance serviceInstance = loadBalancerClient.choose("service-provide-01");
+//		Server server = ribbonLoadBalancer.chooseServer("service-provide-01");
+		String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/getUser/" + uid;
 		logger.info(url);
 		Object obj = restTemplate.getForObject(url, String.class);
 		logger.info(obj);

@@ -21,7 +21,8 @@ http://localhost:8000/myexample/module01/ActionOne/index.do
 http://localhost:8000/myexample/module01/ActionOne/greeting.do
 http://localhost:8000/myexample/module01/ActionOne/addUser.do
 http://localhost:8000/myexample/module01/ActionOne/testMybatis.do
-http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do
+http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do?param=test
+http://localhost:8000/myexample/module01/ActionOne/testRibbonClient.do?param=accessAnotherService
 http://localhost:8000/myexample/module01/ActionOne/testEurekaClient.do
 http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=2&param=abc
 http://localhost:8000/myexample/module01/ActionOne/testHystrix.do?uid=200&param=abc

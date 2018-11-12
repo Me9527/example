@@ -89,7 +89,7 @@ public class ActionOne {
 	
 	@RequestMapping
 	@ResponseBody
-	public Object testRibbonClient(String param) {
+	public Object testRibbonClient(@RequestParam(value = "param") String param) {
 		
 		Object rs = serviceOne.testRibbonClient(param);
 		return rs;
