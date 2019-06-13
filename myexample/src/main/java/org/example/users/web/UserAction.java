@@ -24,13 +24,24 @@ public class UserAction {
 
 	private IUserService userService;
 
+	@ResponseBody
 	@RequestMapping
-	public String getAllUser(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
+	public List<UserInfoVO> getAllUser(@RequestParam(value = "username", required = false, defaultValue = "钟馗") String username,
 			Model model) {
 
-		return "page02";
+		return makeUserDemoData();
 	}
 	
+    private List<UserInfoVO> makeUserDemoData() {
+        List<UserInfoVO> datas = new ArrayList<UserInfoVO>();
+        UserInfoVO t1 = new UserInfoVO(20L, "孙悟空", "花果山");
+        UserInfoVO t2 = new UserInfoVO(20L, "猪八戒", "高老庄");
+        UserInfoVO t3 = new UserInfoVO(20L, "沙僧", "流沙河");
+        UserInfoVO t4 = new UserInfoVO(20L, "唐三藏", "大唐王朝");
+        UserInfoVO t5 = new UserInfoVO(20L, "you", "space");
+        datas.add(t1);  datas.add(t2);  datas.add(t3);  datas.add(t4);  datas.add(t5);
+        return datas;
+    }
 	//定制框架功能，MVC请求URL模式为模块名/类名/方法名
 	//http://localhost:8000/myexample/users/UserAction/getUserInfo.do
 	//@RequestMapping("/getUserInfo.do")	//为什么在  MappingJackson2HttpMessageConverter 中配置不起作用。
