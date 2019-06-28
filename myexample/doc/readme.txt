@@ -244,4 +244,76 @@ eureka.serviceUrl.default=http://localhost:8080/eureka/v2/
         </property>
     </bean>
     
+
+
+注意，import命令具有提升效果，会提升到整个模块的头部，首先执行。
+最后，import语句会执行所加载的模块，因此可以有下面的写法。
+如果多次重复执行同一句import语句，那么只会执行一次，而不会执行多次。
+import语句是 Singleton 模式
+目前阶段，通过 Babel 转码，CommonJS 模块的require命令和 ES6 模块的import命令，可以写在同一个模块里面
+export default就是输出一个叫做default的变量或方法，然后系统允许你为它取任意名字
+
+// 函数声明
+async function foo() {}
+
+// 函数表达式
+const foo = async function () {};
+
+// 对象的方法
+let obj = { async foo() {} };
+obj.foo().then(...)
+
+// Class 的方法
+class Storage {
+  constructor() {
+    this.cachePromise = caches.open('avatars');
+  }
+
+  async getAvatar(name) {
+    const cache = await this.cachePromise;
+    return cache.match(`/avatars/${name}.jpg`);
+  }
+}
+
+const storage = new Storage();
+storage.getAvatar('jake').then(…);
+
+// 箭头函数
+const foo = async () => {};
+
+throw new Error('出错了');
+
+async function f() {
+  await Promise.reject('出错了');
+}
+
+f()
+.then(v => console.log(v))
+.catch(e => console.log(e))
+// 出错了
+
+// 写法一
+let [foo, bar] = await Promise.all([getFoo(), getBar()]);
+
+// 写法二
+let fooPromise = getFoo();
+let barPromise = getBar();
+let foo = await fooPromise;
+let bar = await barPromise;
+
+上面两种写法，getFoo和getBar都是同时触发，这样就会缩短程序的执行时间
+
+
+  let docs = [{}, {}, {}];
+  let promises = docs.map((doc) => db.post(doc));
+  
+一句话，defer是“渲染完再执行”，async是“下载完就执行”。另外，如果有多个defer脚本，会按照它们在页面出现的顺序加载，而多个async脚本是不能保证加载顺序的。
+一般来说，调用resolve或reject以后，Promise 的使命就完成了，后继操作应该放到then方法里面，而不应该直接写在resolve或reject的后面。所以，最好在它们前面加上return语句，这样就不会有意外。
+Promise 内部的错误不会影响到 Promise 外部的代码，通俗的说法就是“Promise 会吃掉错误
+需要注意的是，立即resolve()的 Promise 对象，是在本轮“事件循环”（event loop）的结束时执行，而不是在下一轮“事件循环”的开始时。  
+
+
+对象中的扩展运算符(...)用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中
+
+
 		
